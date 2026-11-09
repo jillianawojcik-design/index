@@ -1,5 +1,5 @@
-import SiteNav from "./components/SiteNav";
-import Pricing from "./components/Pricing";
+import SiteNav from "../components/SiteNav";
+import Pricing from "../components/Pricing";
 
 // Homepage — ported from the original static index.html.
 // Markup is unchanged apart from JSX syntax (className, style objects).
