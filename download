@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# Next.js build output
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Vercel
+.vercel
+
+# Secrets — never commit these. Real keys go in .env.local (local)
+# and in Vercel → Settings → Environment Variables (deployed).
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+npm-debug.log*
