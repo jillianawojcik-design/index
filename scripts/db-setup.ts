@@ -11,7 +11,7 @@ import { readFileSync } from "node:fs";
 import { neon } from "@neondatabase/serverless";
 import { loadEnv } from "./load-env.mjs";
 import { hashPassword } from "../lib/password";
-import { DEMO_PORTFOLIO } from "./demo-data";
+import { DEMO_PORTFOLIO, DEMO_SLUG } from "./demo-data";
 
 const DEMO_EMAIL = "demo@demo.com";
 const DEMO_NAME = "Jordan Rivera"; // fictional sample student
@@ -62,13 +62,14 @@ async function main() {
     SELECT ${user.id}, 'pro', 'paid', 'seed', 0
     WHERE NOT EXISTS (SELECT 1 FROM purchases WHERE user_id = ${user.id} AND source = 'seed')`;
 
-  // Sample portfolio (replaced on every run so it stays current).
-  await sql`DELETE FROM portfolios WHERE user_id = ${user.id}`;
+  // Sample portfolio, published at /p/jordan-rivera (replaced on every run so it stays current).
+  await sql`DELETE FROM portfolios WHERE user_id = ${user.id} OR slug = ${DEMO_SLUG}`;
   await sql`
-    INSERT INTO portfolios (user_id, title, content)
-    VALUES (${user.id}, ${`${DEMO_NAME} — Portfolio`}, ${JSON.stringify(DEMO_PORTFOLIO)}::jsonb)`;
+    INSERT INTO portfolios (user_id, title, content, slug, target_role, published, published_at)
+    VALUES (${user.id}, ${`${DEMO_NAME} — Portfolio`}, ${JSON.stringify(DEMO_PORTFOLIO)}::jsonb,
+            ${DEMO_SLUG}, ${DEMO_PORTFOLIO.targetRole}, true, now())`;
 
-  console.log(`✓ Demo account ready: ${DEMO_EMAIL} (Folioform Pro, sample portfolio)`);
+  console.log(`✓ Demo account ready: ${DEMO_EMAIL} (Folioform Pro, published at /p/${DEMO_SLUG})`);
 }
 
 main().catch((err) => {

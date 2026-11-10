@@ -61,3 +61,31 @@ CREATE TABLE IF NOT EXISTS portfolios (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS portfolios_user_id_idx ON portfolios (user_id);
+
+-- PORTFOLIO PUBLISHING (Step 3) ------------------------------------------
+-- One portfolio per account for now. `slug` is the public address
+-- (/p/<slug>); a portfolio is visible to visitors only when published = true.
+ALTER TABLE portfolios ADD COLUMN IF NOT EXISTS slug text;
+ALTER TABLE portfolios ADD COLUMN IF NOT EXISTS target_role text;
+ALTER TABLE portfolios ADD COLUMN IF NOT EXISTS published boolean NOT NULL DEFAULT false;
+ALTER TABLE portfolios ADD COLUMN IF NOT EXISTS published_at timestamptz;
+CREATE UNIQUE INDEX IF NOT EXISTS portfolios_slug_key ON portfolios (slug);
+CREATE UNIQUE INDEX IF NOT EXISTS portfolios_user_id_key ON portfolios (user_id);
+
+-- AI GENERATION LOG (Step 3) ---------------------------------------------
+-- One row per generation request. Used to enforce daily limits (API cost
+-- control) and to block a second request while one is still running.
+-- Uploaded documents are never stored — only this metadata.
+CREATE TABLE IF NOT EXISTS generation_requests (
+  id            uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       uuid        NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  status        text        NOT NULL DEFAULT 'running' CHECK (status IN ('running', 'succeeded', 'failed')),
+  error_code    text,
+  model         text,
+  input_tokens  integer,
+  output_tokens integer,
+  created_at    timestamptz NOT NULL DEFAULT now(),
+  finished_at   timestamptz
+);
+CREATE INDEX IF NOT EXISTS generation_requests_user_idx ON generation_requests (user_id, created_at);
+CREATE INDEX IF NOT EXISTS generation_requests_created_idx ON generation_requests (created_at);
