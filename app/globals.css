@@ -293,3 +293,114 @@ footer { border-top: 1px solid var(--line); padding: 36px 0; font-size: 0.88rem;
   .menu-btn { display: block; }
   .plans, .steps, .addons, .features { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   Accounts (Step 2) — login, signup and dashboard.
+   Everything above this line is the original homepage CSS, unchanged.
+   These rules reuse the same color variables, fonts, buttons and cards.
+   ===================================================================== */
+
+/* ---------- Login / signup ---------- */
+.auth-page { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+.auth-aside {
+  position: relative; overflow: hidden; background: var(--ink); color: var(--paper);
+  padding: 44px 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+}
+.auth-aside::after {
+  content: ""; position: absolute; inset: auto -120px -160px auto; width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(226,85,59,0.35), transparent 65%); pointer-events: none;
+}
+.auth-aside .logo { color: var(--paper); position: relative; }
+.auth-aside h2 { font-size: clamp(2.1rem, 3.4vw, 3rem); margin-bottom: 16px; position: relative; }
+.auth-aside h2 em { font-style: italic; color: var(--accent); }
+.auth-aside p { color: #c4cbe0; max-width: 430px; position: relative; }
+.auth-points { list-style: none; margin-top: 26px; display: grid; gap: 12px; position: relative; }
+.auth-points li { padding-left: 28px; position: relative; color: #e3e6f0; font-size: 0.95rem; }
+.auth-points li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.auth-aside small { color: #8f98b3; font-size: 0.8rem; position: relative; }
+.auth-main { display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
+.auth-card { width: 100%; max-width: 420px; }
+.auth-card > .logo { display: none; margin-bottom: 32px; }
+.auth-card h1 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 8px; }
+.auth-sub { color: var(--ink-soft); margin-bottom: 28px; }
+.auth-form { display: grid; gap: 18px; }
+.field { display: grid; gap: 6px; font-size: 0.88rem; font-weight: 600; }
+.field input {
+  font: inherit; font-size: 1rem; font-weight: 400; color: var(--ink); background: var(--white);
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; width: 100%;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(226, 85, 59, 0.18); }
+.field-hint { font-size: 0.8rem; font-weight: 400; color: var(--ink-soft); }
+.form-error {
+  background: #fde8e3; color: var(--accent-dark); border: 1px solid #f5c5b9;
+  padding: 11px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500;
+}
+.auth-form .btn { margin-top: 4px; padding: 14px 22px; }
+.btn[disabled] { opacity: 0.65; cursor: progress; transform: none; }
+.auth-switch { margin-top: 26px; text-align: center; font-size: 0.92rem; color: var(--ink-soft); }
+.auth-switch a { color: var(--accent); font-weight: 600; }
+
+/* ---------- Signed-in header ---------- */
+.app-nav { display: flex; align-items: center; gap: 16px; }
+.app-user { font-size: 0.88rem; color: var(--ink-soft); }
+.btn-sm { padding: 8px 16px; font-size: 0.88rem; }
+
+/* ---------- Dashboard ---------- */
+.dash { padding-top: 56px; padding-bottom: 96px; }
+.dash h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); margin-bottom: 10px; }
+.dash-lead { color: var(--ink-soft); font-size: 1.05rem; max-width: 640px; margin-bottom: 36px; }
+.dash-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+.dash-side { display: grid; gap: 22px; }
+.dash-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
+.dash-card h2 { font-size: 1.3rem; margin-bottom: 12px; }
+.dash-card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+.dash-card-head h2 { margin-bottom: 0; }
+.dash-plan { font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.dash-note { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22a06b; display: inline-block; }
+.dash-meta { display: grid; gap: 12px; }
+.dash-meta div { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--paper-2); font-size: 0.9rem; }
+.dash-meta div:last-child { border-bottom: 0; padding-bottom: 0; }
+.dash-meta dt { color: var(--ink-soft); }
+.dash-meta dd { font-weight: 600; text-align: right; overflow-wrap: anywhere; }
+.dash-empty { border: 2px dashed var(--line); border-radius: 16px; padding: 44px 28px; text-align: center; background: var(--paper); }
+.dash-empty-icon { font-size: 2.2rem; margin-bottom: 8px; }
+.dash-empty h3 { font-size: 1.35rem; margin-bottom: 8px; }
+.dash-empty p { color: var(--ink-soft); max-width: 440px; margin: 0 auto 18px; font-size: 0.95rem; }
+
+/* ---------- Portfolio view ---------- */
+.pf { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.pf-cover {
+  display: flex; gap: 16px; align-items: center; padding: 24px; color: #fff;
+  background: linear-gradient(135deg, #16213a 0%, #24345a 60%, #3a2a4a 100%);
+}
+.pf-name { font-size: 1.5rem; }
+.pf-headline { font-size: 0.85rem; opacity: 0.8; }
+.pf-body { padding: 24px; }
+.pf-intro { font-size: 1rem; margin-bottom: 22px; }
+.pf-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin: 22px 0 10px; }
+.pf-projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.pf-projects .pcard { margin-bottom: 0; display: flex; flex-direction: column; gap: 6px; }
+.pf-projects strong { font-size: 0.95rem; }
+.pf-result { font-family: "Fraunces", serif; font-weight: 700; color: var(--accent); font-size: 1rem; }
+.pf-text { font-size: 0.85rem; color: var(--ink-soft); }
+.pf-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.pf-exp { list-style: none; display: grid; gap: 16px; }
+.pf-exp-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pf-exp-top span { font-size: 0.82rem; color: var(--ink-soft); }
+.pf-org { font-size: 0.88rem; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
+.pf-exp ul { padding-left: 18px; font-size: 0.9rem; color: var(--ink-soft); display: grid; gap: 4px; }
+
+@media (max-width: 960px) {
+  .dash-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-aside { display: none; }
+  .auth-card > .logo { display: inline-block; }
+}
+@media (max-width: 520px) {
+  .app-user { display: none; }
+  .dash-card, .pf-body { padding: 20px; }
+}

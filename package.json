@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "db:check": "node scripts/db-check.mjs"
+    "db:check": "node scripts/db-check.mjs",
+    "db:setup": "tsx scripts/db-setup.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
@@ -22,6 +23,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "tsx": "^4"
   }
 }

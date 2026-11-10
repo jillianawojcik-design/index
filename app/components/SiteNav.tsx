@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 // Sticky top navigation. The only interactive part is the mobile menu,
 // which used to be toggled by a DOM script in the original index.html.
@@ -28,6 +29,7 @@ export default function SiteNav() {
           <li><a href="#pricing" onClick={close}>Pricing</a></li>
           <li><a href="#addons" onClick={close}>Career tools</a></li>
           <li><a href="#faq" onClick={close}>Policies</a></li>
+          <li><Link href="/login" onClick={close}>Log in</Link></li>
           <li>
             <a
               href="#pricing"
